@@ -1,0 +1,28 @@
+<!--
+    https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginner/Border-Radius-Previewer.md
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Border-radius Previewer</title>
+</head>
+<body>
+    <div id="main">
+        <input type="number" id="top-l"></input>
+        <input type="number" id="top-r">
+        <input type="number" id="bottom-l">
+        <input type="number" id="bottom-r">
+        <div id="box"></div>
+    </div>
+
+    <button type="button" onclick="func()">Aplicar</button><br>
+
+    <textarea id="cssText"></textarea><br>
+    <button type="button" onclick="copy()" id="btn">Copiar</button>
+    <script src="script.js"></script>
+</body>
+</html>
