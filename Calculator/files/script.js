@@ -2,86 +2,115 @@ let result = document.getElementById("result");
 let lastOp = document.getElementById("lastOp");
 
 let clearNext = false;
+let firstEntry = null;
+let lastEntry = null;
 let lastResult = 0;
+let currentOp = "";
+let states = {
+    firstOperation: 1,
+    secondOperation: 2,
+    thirdOperation: 3,
+};
+let calcState = states.firstOperation;
 
-function operation(op){
+function operation(op) {
 
-    switch(op){
-        case '+':
-            if(lastOp.value === ""){
-                lastOp.value = result.value + " +";
-            }else if(lastOp.value[lastOp.value.length - 1] !== "="){
-                lastOp.value = lastOp.value + " " + result.value + " =";
-                let str = lastOp.value.split(" ");
-                result.value = lastResult = calc(str[0], str[2], str[1]);
-                console.log(lastResult);
-            }else{
-                console.log(lastResult);
-                lastOp.value = lastResult + " + " + result.value + " =";
-                let str = lastOp.value.split(" ");
-                result.value = calc(str[0], str[2], str[1]);
-                result.value = lastResult = calc(str[0], str[2], str[1]);
-            }
-            clearNext = true;
+    if (calcState === states.firstOperation) {
+        firstEntry = result.value;
+        currentOp = op;
+    } else if (calcState === states.secondOperation) {
+        lastEntry = result.value;
+        lastResult = calc(firstEntry, lastEntry, currentOp);
+    } else if (calcState === states.thirdOperation) {
+        firstEntry = lastResult;
+        lastEntry = result.value;
+        currentOp = op;
+        lastResult = calc(firstEntry, lastEntry, currentOp);
+    }
+
+    renderInput();
+    clearNext = true;
+}
+
+function renderInput() {
+    switch (calcState) {
+        case states.firstOperation:
+            lastOp.value = firstEntry + " " + currentOp;
+            calcState = states.secondOperation;
             break;
-            
-        case '-':
-
-
+        case states.secondOperation:
+            lastOp.value = firstEntry + " " + currentOp + " " + lastEntry + " =";
+            result.value = lastResult;
+            calcState = states.thirdOperation;
             break;
-        case '*':
-    
-            break;
-        case '/':
-
+        case states.thirdOperation:
+            lastOp.value = firstEntry + " " + currentOp + " " + lastEntry + " =";
+            result.value = lastResult;
             break;
     }
 }
 
-function calc(n1, n2, op){
-    switch(op){
-        case '+': return Number(n1) + Number(n2);
-        case '-': return Number(n1) - Number(n2);
-        case '*': return Number(n1) * Number(n2);
-        case '/': return Number(n1) / Number(n2);
+function calc(n1, n2, op) {
+    let qtdDec = Math.max(countDecimals(n1), countDecimals(n2));
+    qtdDec = qtdDec > 3 ? 3 : qtdDec;
+    [n1, n2] = [n1, n2].map(Number);
+    switch (op) {
+        case "+":
+            return (n1 + n2).toFixed(qtdDec);
+        case "-":
+            return (n1 - n2).toFixed(qtdDec);
+        case "*":
+            return (n1 * n2).toFixed(qtdDec);
+        case "/":
+            return (n1 / n2).toFixed(qtdDec);
     }
 }
 
-function equals(){
-    if(lastOp.value === "")
-        return;
+function countDecimals(value) {
+    if (!value.toString().includes(".")) return 0;
+    return value.toString().split(".")[1].length || 0;
 }
 
-function changeSign(){
+function equals() {
+    if (lastOp.value === "") return;
+}
+
+function changeSign() {
     result.value = -result.value;
 }
 
-function insertNum(num){
-    if(clearNext || result.value === "0" && num != "."){
+function insertNum(num) {
+    if (clearNext || (result.value === "0" && num != ".")) {
         result.value = "";
         clearNext = false;
     }
 
-    if(!result.value.includes(".") && result.value.length < 8){
+    if (!result.value.includes(".") && result.value.length < 8) {
         result.value += num;
-    }else{
+    } else {
         let indexDot = result.value.indexOf(".");
-        if(result.value.length - indexDot < 4){
+        if (result.value.length - indexDot < 4) {
             result.value += num;
         }
     }
 }
 
-function insertDecimal(){
-    if(!result.value.includes("."))
-        result.value += ".";
+function insertDecimal() {
+    if (!result.value.includes(".")) result.value += ".";
 }
 
-function clearAll(){
+function clearAll() {
     lastOp.value = "";
     result.value = "0";
+    calcState = states.firstOperation;
 }
 
-function clearLast(){
-    result.value = "0";
+function clearLast() {
+    if (calcState == states.thirdOperation) {
+        result.value = lastEntry;
+        calcState = states.firstOperation;
+        operation(currentOp);
+    } else {
+        result.value = "0";
+    }
 }

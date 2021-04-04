@@ -24,7 +24,7 @@ operations - '+', '-', '/', and '=', a 'C' button (for clear), and an 'AC'
 button (for clear all).
 -   [X] User can enter numbers as sequences up to 8 digits long by clicking on
 digits in the entry pad. Entry of any digits more than 8 will be ignored.
--   [ ] User can click on an operation button to display the result of that
+-   [X] User can click on an operation button to display the result of that
 operation on:
     * the result of the preceding operation and the last number entered OR
     * the last two numbers entered OR
