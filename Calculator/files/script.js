@@ -72,7 +72,7 @@ function countDecimals(value) {
 }
 
 function equals() {
-    if (lastOp.value === "") return;
+    if (currentOp === "") return;
 }
 
 function changeSign() {
