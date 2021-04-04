@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="calculator" name="calc">
+        <input type="text" id="lastOp" name="lastOp" value = "" readonly/>
+        <input type="text" id="result" name="txt" value = "0" readonly/>
+        <button onclick="clearAll()">AC</button>
+        <button onclick="clearLast()">C</button>
+        <button onclick="operation('*')">*</button>
+        <button onclick="operation('/')">/</button>
+        <button onclick="insertNum('7')" += '7'">7</button>
+        <button onclick="insertNum('8')" += '8'">8</button>
+        <button onclick="insertNum('9')" += '9'">9</button>
+        <button onclick="operation('-')">-</button>
+        <button onclick="insertNum('4')" += '4'">4</button>
+        <button onclick="insertNum('5')" += '5'">5</button>
+        <button onclick="insertNum('6')" += '6'">6</button>
+        <button onclick="operation('+')">+</button>
+        <button onclick="insertNum('1')" += '1'">1</button>
+        <button onclick="insertNum('2')" += '2'">2</button>
+        <button onclick="insertNum('3')" += '3'">3</button>
+        <button onclick="equals()" class="clear">=</button>
+        <button onclick="changeSign()">+/-</button>
+        <button onclick="insertNum('0')" += '0'">0</button>
+        <button onclick="insertDecimal()" += '.'">.</button>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
