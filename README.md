@@ -1,3 +1,3 @@
-## 100 APPS REPO
+## APPS REPO
 
 ideas from [here](https://github.com/florinpop17/app-ideas)
