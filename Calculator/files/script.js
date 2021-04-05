@@ -67,6 +67,9 @@ function calc(n1, n2, op) {
         case "*":
             return (n1 * n2).toFixed(qtdDec);
         case "/":
+            let n = n1/n2;
+            qtdDec = countDecimals(n);
+            qtdDec = qtdDec > 3 ? 3 : qtdDec;
             return (n1 / n2).toFixed(qtdDec);
     }
 }
