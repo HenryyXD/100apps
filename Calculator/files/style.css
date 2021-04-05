@@ -18,6 +18,7 @@ body{
     position: relative;
     display:grid;
     border: 15px solid #0c2835;
+    border-radius:30px;
 }
 
 #result{
