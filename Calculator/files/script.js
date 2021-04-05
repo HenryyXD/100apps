@@ -27,20 +27,33 @@ function operation(op) {
             if (op != "=") {
                 lastEntry = result.value;
                 firstEntry = calc(firstEntry,lastEntry,currentOp);
-                calcState = states.firstState;
-                operation(op);
-                clearNext = true;
+                if(countDecimals(firstEntry, 0) > 8){
+                    clearAll();
+                    clearNext = true;
+                    result.value = "ERR";
+                }else{
+                    calcState = states.firstState;
+                    operation(op);
+                    clearNext = true;
+                }
             } else {
                 lastEntry = result.value;
                 lastResult = calc(firstEntry, lastEntry, currentOp);
-                lastOp.value = firstEntry + " " + currentOp + " " + lastEntry + " =";
-                result.value = lastResult;
-                currentOp = "=";
-                calcState = states.firstState;
+                if(countDecimals(lastResult, 0) > 8){
+                    clearAll();
+                    clearNext = true;
+                    result.value = "ERR";
+                }else{
+                    lastOp.value = firstEntry + " " + currentOp + " " + lastEntry + " =";
+                    result.value = lastResult;
+                    currentOp = "=";
+                    calcState = states.firstState;
+                }
             }
             break;
     }
 }
+
 
 function calc(n1, n2, op) {
     let qtdDec = Math.max(countDecimals(n1), countDecimals(n2));
@@ -58,9 +71,13 @@ function calc(n1, n2, op) {
     }
 }
 
-function countDecimals(value) {
-    if (!value.toString().includes(".")) return 0;
-    return value.toString().split(".")[1].length || 0;
+function countDecimals(value, place = 1) {
+    if (!value.toString().includes(".")){
+        if(place == 0)
+            return value.length;
+        return 0;
+    }
+    return value.toString().split(".")[place].length;   
 }
 
 function equals() {
@@ -100,7 +117,6 @@ function insertDecimal() {
 function clearAll() {
     lastOp.value = "";
     result.value = "";
-    clearNext = false;
     firstEntry = null;
     lastEntry = null;
     currentOp = "";
