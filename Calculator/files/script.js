@@ -7,48 +7,41 @@ let lastEntry = null;
 let lastResult = 0;
 let currentOp = "";
 let states = {
-    firstOperation: 1,
-    secondOperation: 2,
-    thirdOperation: 3,
+    firstState: 1,
+    secondState: 2,
 };
-let calcState = states.firstOperation;
+let calcState = states.firstState;
 
 function operation(op) {
 
-    if (calcState === states.firstOperation) {
-        firstEntry = result.value;
+    if (calcState === states.firstState) {
+        console.log(firstEntry, currentOp);
+        if(firstEntry == null || currentOp == "=")
+            firstEntry = result.value;
         currentOp = op;
-    } else if (calcState === states.secondOperation) {
-        lastEntry = result.value;
-        lastResult = calc(firstEntry, lastEntry, currentOp);
-    } else if (calcState === states.thirdOperation) {
-        firstEntry = lastResult;
-        lastEntry = result.value;
-        currentOp = op;
-        lastResult = calc(firstEntry, lastEntry, currentOp);
-    }
-
-    renderInput();
-    clearNext = true;
-}
-
-function renderInput() {
-    switch (calcState) {
-        case states.firstOperation:
-            lastOp.value = firstEntry + " " + currentOp;
-            calcState = states.secondOperation;
-            break;
-        case states.secondOperation:
+        lastOp.value = firstEntry + " " + currentOp;
+        calcState = states.secondState;
+        result.value = "";
+    } else if (calcState === states.secondState) {
+        if(op != "="){
+            lastEntry = result.value;
+            console.log(lastEntry, firstEntry, lastResult);
+            firstEntry = lastResult = calc(firstEntry, lastEntry, currentOp);
+            calcState = states.firstState;
+            console.log(lastEntry, firstEntry, lastResult);
+            operation(op);
+            result.value = "";
+        }else{
+            lastEntry = result.value;
+            lastResult = calc(firstEntry, lastEntry, currentOp);
             lastOp.value = firstEntry + " " + currentOp + " " + lastEntry + " =";
             result.value = lastResult;
-            calcState = states.thirdOperation;
-            break;
-        case states.thirdOperation:
-            lastOp.value = firstEntry + " " + currentOp + " " + lastEntry + " =";
-            result.value = lastResult;
-            break;
-    }
+            currentOp = "=";
+            calcState = states.firstState;
+        }
+    } 
 }
+
 
 function calc(n1, n2, op) {
     let qtdDec = Math.max(countDecimals(n1), countDecimals(n2));
@@ -73,6 +66,8 @@ function countDecimals(value) {
 
 function equals() {
     if (currentOp === "") return;
+    calcState = states.secondState;
+    operation("=");
 }
 
 function changeSign() {
@@ -102,15 +97,14 @@ function insertDecimal() {
 function clearAll() {
     lastOp.value = "";
     result.value = "0";
-    calcState = states.firstOperation;
+    clearNext = false;
+    firstEntry = null;
+    lastEntry = null;
+    currentOp = "";
+    lastResult = 0;
+    calcState = states.firstState;
 }
 
 function clearLast() {
-    if (calcState == states.thirdOperation) {
-        result.value = lastEntry;
-        calcState = states.firstOperation;
-        operation(currentOp);
-    } else {
-        result.value = "0";
-    }
+    result.value = "0";
 }
