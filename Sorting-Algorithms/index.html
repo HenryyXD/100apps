@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithms</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+    <h1>Sorting Algorithms</h1>
+    <header>
+        
+        <div class = "wrapper">
+            <div class = "ranges">
+                <label for="qtdNUm">Quantidade de Números:</label>
+                <input type="range" class = "istyle" id="qtdNum" name="qtdNum" min="10" max="1000" value="10">
+            </div>
+            <div class = "ranges">
+                <label for="vel">Velocidade do Algoritmo:</label>
+                <input type="range" id="vel"  name="vel" min="1" max="5" value="3">
+            </div>
+        </div>
+        <div class = "wrapper">
+            <label for="algorithms">Escolha um algortimo:</label>
+            <div class="select">
+                <select name="algorithms" id="algoSelector">
+                    <option value="Selection">Selection</option>
+                </select>
+                <div class="select_arrow">
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <button type="button" id="random">Gerar Números</button>
+            <button type="button">SORT</button>
+        </div>
+        <div class="container">
+            <p>Swaps: <span id="qtdTroca"></span></p><br>
+            <p>Comparações: <span id="qtdComp"></span></p><br>
+            <p>Steps: <span id="qtdStep"></span></p>
+        </div>
+    </header>
+    <div id = "canvas">
+    </div>
+    <script type="text/javascript" src="scripts/script.js"></script>
+    <script type="text/javascript" src="scripts/selectionSort.js"></script>
+</body>
+</html>
