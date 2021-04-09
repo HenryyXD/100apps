@@ -1,7 +1,6 @@
 async function selectionSort() {
     let menorIndice = -1,
-        minorColor = "red",
-        tempHeight;
+        minorColor = "red";
 
     for (let i = 0; i < nums.length; i++, incrementSpan("qtdStep")) {
         for (let j = i; j < nums.length; j++, incrementSpan("qtdStep")) {

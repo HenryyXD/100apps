@@ -15,8 +15,17 @@ function createNums() {
     removeAllChilds(canvas);
     nums = [];
 
-    for (let i = 0; i < qtdNum.value; i++) {
-        nums[i] = Math.floor(Math.random() * 500 + 1);
+    switch(generateType.value){
+        case 'random':
+            for (let i = 0; i < qtdNum.value; i++) {
+                nums[i] = Math.floor(Math.random() * 500 + 1);
+            }
+            break;
+        case 'reversed':
+            for (let i = 0; i < qtdNum.value; i++) {
+                nums[i] = qtdNum.value - i;
+            }
+            break;
     }
 
     let escala = Math.max(...nums);
