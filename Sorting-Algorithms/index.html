@@ -13,7 +13,7 @@
     <header>
         <div>
             <div class="ranges">
-                <label for="qtdNUm">Quantidade de Números:</label>
+                <label for="qtdNum">Quantidade de Números: <span id="spanQtdNum"></span></label>
                 <input type="range" class="istyle" id="qtdNum" name="qtdNum" min="10" max="500" step="5" value="10" oninput="createNums()">
             </div>
             <div class="ranges">
@@ -25,8 +25,9 @@
             <label for="algorithms">Escolha um algortimo:</label>
             <div class="select">
                 <select name="algorithms" id="algoSelector">
-                    <option value="Selection">Selection</option>
-                    <option value="Bubble">Bubble</option>
+                    <option value="selection">Selection</option>
+                    <option value="bubble">Bubble</option>
+                    <option value="insertion">Insertion</option>
                 </select>
                 <div class="select_arrow">
                 </div>
@@ -39,6 +40,7 @@
                     <select name="algorithms" id="generateType">
                         <option value="random">Aleatório</option>
                         <option value="reversed">Invertido</option>
+                        <option value="nearlySorted">Quase Ordenado</option>
                     </select>
                     <div class="select_arrow">
                 </div>
@@ -47,14 +49,15 @@
         <button type="button" onclick="sort()">SORT</button>
     </header>
     <div class="container">
-        <p>Comparações: <span id="qtdComp">0</span></p><br>
-        <p>Swaps: <span id="qtdSwap">0</span></p><br>
-        <p>Loops: <span id="qtdStep">0</span></p>
+        <p>Comparações: <span class = "stats" id="qtdComp">0</span></p><br>
+        <p>Swaps: <span class = "stats" id="qtdSwap">0</span></p><br>
+        <p>Loops: <span class = "stats" id="qtdStep">0</span></p><br>
     </div>
     <div id="canvas">
     </div>
     <script type="text/javascript" src="scripts/script.js"></script>
     <script type="text/javascript" src="scripts/selectionSort.js"></script>
     <script type="text/javascript" src="scripts/bubbleSort.js"></script>
+    <script type="text/javascript" src="scripts/insertionSort.js"></script>
 </body>
 </html>

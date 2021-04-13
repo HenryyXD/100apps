@@ -7,6 +7,7 @@ let nums = [];
 let delay, escala;
 let iColor = "darkred",
     orderedColor = "green",
+    pivotColor = "red",
     color;
 
 window.onload = createNums();
@@ -26,9 +27,31 @@ function createNums() {
                 nums[i] = qtdNum.value - i;
             }
             break;
+        case 'nearlySorted':
+            for (let i = 0; i < qtdNum.value; i++) {
+                nums[i] = i+1;
+            }
+            
+            let div = Math.floor(nums.length*0.2);
+            let range = Math.floor(nums.length * 0.1);
+
+            for(let i = 0; i < div; i++){
+                let pos1 = Math.floor(Math.random() * (nums.length - (range*2)) + range);
+                let pos2 = pos1 + Math.floor(Math.random() * (range * 2)  - range);
+                if(pos1 == pos2){
+                    i--;
+                }else{
+                    swapNums(pos1, pos2);
+                }
+            }
+            break;
+        case 'fewUnique':
+            //to do
+            break;
     }
 
     let escala = Math.max(...nums);
+    document.getElementById("spanQtdNum").innerHTML = qtdNum.value;
 
     for (let num of nums) {
         let div = document.createElement("div");
@@ -55,6 +78,9 @@ function sort() {
             break;
         case "bubble":
             bubbleSort();
+            break;
+        case "insertion":
+            insertionSort();
             break;
     }
 }
@@ -104,7 +130,7 @@ function incrementSpan(elementID) {
 }
 
 function clearSpans() {
-    document.querySelectorAll("span").forEach((element) => {
+    document.querySelectorAll("span.stats").forEach((element) => {
         element.innerHTML = "0";
     });
 }

@@ -1,6 +1,5 @@
 async function selectionSort() {
-    let menorIndice = -1,
-        minorColor = "red";
+    let menorIndice = -1;
 
     for (let i = 0; i < nums.length; i++, incrementSpan("qtdStep")) {
         for (let j = i; j < nums.length; j++, incrementSpan("qtdStep")) {
@@ -13,7 +12,7 @@ async function selectionSort() {
                 if (menorIndice != -1) {
                     setColor(menorIndice, color);
                 }
-                setColor(j, minorColor);
+                setColor(j, pivotColor);
                 menorIndice = j;
             } else {
                 setColor(j, color);
