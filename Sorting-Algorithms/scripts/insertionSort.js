@@ -14,12 +14,12 @@ async function insertionSort() {
             swapHeight(j, j + 1);
             incrementSpan("qtdSwap");
             incrementSpan("qtdStep");
-            setColor(j, color);
             if (delay != -1 || j % 50 == 0) {
                 await sleep(delay);
             }
-            j--;
+            setColor(j, color);
             incrementSpan("qtdComp");
+            j--;
         }
         nums[j + 1] = value;
         setColor(i, color);
