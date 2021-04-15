@@ -1,7 +1,9 @@
 async function bubbleSort() {
     let swap = false;
-    for (let i = 0; i < nums.length; i++, incrementSpan("qtdStep")) {
-        for (let j = 0; j < nums.length - i - 1; j++, incrementSpan("qtdStep")) {
+    for (let i = 0; i < nums.length; i++) {
+        incrementSpan("qtdStep")
+        for (let j = 0; j < nums.length - i - 1; j++) {
+            incrementSpan("qtdStep")
             setColor(j, iColor);
             setColor(j + 1, iColor);
             if (delay != -1 || j % 50 == 0) {
@@ -18,13 +20,9 @@ async function bubbleSort() {
             setColor(j + 1, color);
         }
         if (!swap) {
-            for (let i = 0; i < nums.length; i++) {
-                setColor(i, orderedColor);
-            }
             break;
         }
-        setColor(nums.length - i - 1, orderedColor);
+        setColor(nums.length - i - 1, sortedColor);
         swap = false;
     }
-    enableAllInputs();
 }

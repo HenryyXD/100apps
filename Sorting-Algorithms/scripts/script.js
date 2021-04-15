@@ -6,7 +6,7 @@ let generateType = document.getElementById("generateType");
 let nums = [];
 let delay, escala;
 let iColor = "darkred",
-    orderedColor = "green",
+    sortedColor = "green",
     pivotColor = "red",
     color;
 
@@ -50,7 +50,7 @@ function createNums() {
             break;
     }
 
-    let escala = Math.max(...nums);
+    escala = Math.max(...nums);
     document.getElementById("spanQtdNum").innerHTML = qtdNum.value;
 
     for (let num of nums) {
@@ -68,21 +68,27 @@ function removeAllChilds(parent) {
     }
 }
 
-function sort() {
+async function sort() {
     clearSpans();
     disableAllInputs();
     delay = getDelay();
+    setAllChildDefaultColor();
     switch (algo.value.toLowerCase()) {
         case "selection":
-            selectionSort();
+            await selectionSort();
             break;
         case "bubble":
-            bubbleSort();
+            await bubbleSort();
             break;
         case "insertion":
-            insertionSort();
+            await insertionSort();
+            break;
+        case "merge":
+            await mergeSort();
             break;
     }
+    setAllChildSortedColor();
+    enableAllInputs();
 }
 
 function disableAllInputs() {
@@ -124,9 +130,9 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function incrementSpan(elementID) {
+function incrementSpan(elementID, qtd = 1) {
     document.getElementById(elementID).innerHTML =
-        Number(document.getElementById(elementID).innerHTML) + 1;
+        Number(document.getElementById(elementID).innerHTML) + qtd;
 }
 
 function clearSpans() {
@@ -147,4 +153,14 @@ function swapHeight(index1, index2) {
 
 function setColor(index, color) {
     canvas.childNodes[index].style.background = color;
+}
+
+function setAllChildSortedColor(){
+    for (let i = 0; i < nums.length; i++) {
+        setColor(i, sortedColor);
+    }
+}
+
+function setAllChildDefaultColor(){
+    nums.map((e, i) => setColor(i, color));
 }

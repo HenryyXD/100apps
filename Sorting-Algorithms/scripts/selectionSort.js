@@ -1,8 +1,10 @@
 async function selectionSort() {
     let menorIndice = -1;
 
-    for (let i = 0; i < nums.length; i++, incrementSpan("qtdStep")) {
-        for (let j = i; j < nums.length; j++, incrementSpan("qtdStep")) {
+    for (let i = 0; i < nums.length; i++) {
+        incrementSpan("qtdStep")
+        for (let j = i; j < nums.length; j++) {
+            incrementSpan("qtdStep")
             setColor(j, iColor);
             if (delay != -1 || j % 50 == 0) {
                 await sleep(delay);
@@ -19,12 +21,10 @@ async function selectionSort() {
             }
         }
         swapHeight(i, menorIndice);
-        incrementSpan("qtdSwap");
         swapNums(i, menorIndice);
+        incrementSpan("qtdSwap");
         setColor(menorIndice, color);
-        setColor(i, orderedColor);
+        setColor(i, sortedColor);
         menorIndice = -1;
     }
-
-    enableAllInputs();
 }

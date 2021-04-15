@@ -1,6 +1,7 @@
 async function insertionSort() {
     let i, j, value;
-    for (i = 0; i < nums.length; i++, incrementSpan("qtdStep")) {
+    for (i = 0; i < nums.length; i++) {
+        incrementSpan("qtdStep")
         setColor(i, pivotColor);
         if (delay != -1 || j % 50 == 0) {
             await sleep(delay);
@@ -24,8 +25,4 @@ async function insertionSort() {
         nums[j + 1] = value;
         setColor(i, color);
     }
-    for (let i = 0; i < nums.length; i++) {
-        setColor(i, orderedColor);
-    }
-    enableAllInputs();
 }
