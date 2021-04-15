@@ -46,7 +46,15 @@ function createNums() {
             }
             break;
         case 'fewUnique':
-            //to do
+            let step = 0;
+            let divStep = qtdNum.value/5;
+            for(let i = 0; i < qtdNum.value; i++){
+                if(i % divStep == 0) {
+                    step++;
+                }
+                nums[i] = step;
+            }
+            nums.sort(() => Math.random() - 0.5);
             break;
     }
 
