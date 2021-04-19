@@ -84,7 +84,7 @@ function countDecimals(value, place = 1) {
 }
 
 function equals() {
-    if (currentOp === "") return;
+    if (currentOp === "" || currentOp === "=") return;
     calcState = states.secondState;
     operation("=");
 }
