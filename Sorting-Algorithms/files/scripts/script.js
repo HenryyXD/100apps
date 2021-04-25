@@ -4,7 +4,7 @@ let algo = document.getElementById("algoSelector");
 let canvas = document.getElementById("canvas");
 let generateType = document.getElementById("generateType");
 let nums = [];
-let delay, escala;
+let delay = 50, escala;
 let iColor = "darkred",
     sortedColor = "green",
     pivotColor = "red",
@@ -101,7 +101,6 @@ async function sort() {
 
 function disableAllInputs() {
     qtdNum.disabled = true;
-    velAlgo.disabled = true;
     algo.disabled = true;
     generateType.disabled = true;
     document.querySelectorAll("button").forEach((element) => {
@@ -111,7 +110,6 @@ function disableAllInputs() {
 
 function enableAllInputs() {
     qtdNum.disabled = false;
-    velAlgo.disabled = false;
     algo.disabled = false;
     generateType.disabled = false;
     document.querySelectorAll("button").forEach((element) => {
@@ -119,7 +117,12 @@ function enableAllInputs() {
     });
 }
 
+function setDelay(){
+    delay = getDelay();
+}
+
 function getDelay() {
+    
     switch (Number(velAlgo.value)) {
         case 1:
             return 1000;
